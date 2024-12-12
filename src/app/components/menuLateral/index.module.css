@@ -1,0 +1,103 @@
+.bodyPrincipal {
+    display: flex;
+    position: sticky;
+    height: 100vh;
+}
+
+.menu {
+    background-color: #2980B9;
+    width: 25rem;
+    display: flex;
+    flex-direction: column;
+    padding: 2rem 0 2rem 0;
+    transition: .3s ease-in;
+}
+
+.menuEncolhido {
+    transition: .4s ease-in-out;
+    background-color: #2980B9;
+    width: 6rem;
+    display: flex;
+    flex-direction: column;
+    padding: 2rem 0 2rem 0;
+}
+
+.menuLogo {
+    padding-left: 1.4rem;
+    display: block;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    margin: 0 1rem 1.4rem 0;
+}
+
+.menuLogo:hover {
+    transition: .2s ease;
+    filter: drop-shadow(.4px 0px .4px rgb(251, 247, 219));
+}
+
+.menuLogoImg {
+    cursor: pointer;
+}
+
+.menuItensItem {
+    padding: 1rem 0 1rem 1.4rem;
+    cursor: pointer;
+    gap: .8rem;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    color: white;
+    font-weight: bold;
+    font-size: 1.7rem;
+}
+
+.menuItensItem:hover {
+    background-color: #1F6B91;
+}
+
+.menuItensItemIcon {
+    pointer-events: none;
+    margin-right: 1rem;
+    margin-left: 3px;
+    font-size: 2.5rem !important;
+    color: white;
+}
+
+.menuItensItemIconClose {
+    margin-right: 1rem;
+    margin-left: 5px;
+    font-size: 2rem !important;
+    color: white;
+}
+
+.menuItensItemIconClose:hover {
+    cursor: pointer;
+    filter: brightness(1.3)
+}
+
+.menuItensItemLogout {
+    margin: 0 1rem 1rem 0.5rem;
+    font-size: 1.8rem;
+    color: white;
+}
+
+.menuItensItemLogout:hover {
+    cursor: pointer;
+    filter: brightness(1.3)
+}
+
+.menuItensItemTexto {
+    letter-spacing: .1rem;
+}
+
+.menuItensIconSidebar {
+    padding: 1rem 0 0 1.4rem;
+    display: flex;
+    flex-direction: column-reverse;
+    flex-grow: 1;
+    align-items: flex-end;
+    align-items: baseline;
+}
