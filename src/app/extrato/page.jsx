@@ -2,29 +2,26 @@
 import { useEffect, useState } from "react";
 import { MenuKebab } from "../components/menuKebab";
 import { ModalBasico } from "../components/modal";
-import { Button, styled } from "@mui/material";
+import { Alert, Box, Button, styled, Typography } from "@mui/material";
 import { Grafico } from "../components/grafico";
 import { Abas } from "../components/tabs/index";
 import { formatadorMonetario } from "@/utils/formatadores";
 
 // CSS-in-JS para estilização
 const styles = {
-  container: {
-    padding: "0px 20px",
-  },
   title: {
     fontSize: "36px",
     marginBottom: "20px",
-    textAlign: "center",
+    textAlign: "left",
     color: "#2980B9", // Título destacado em tom quente
   },
   header: {
     display: 'flex',
     justifyContent: 'space-between',
     marginBottom: "20px",
-    padding: "10px",
+    padding: "1.5rem 1rem",
     border: "1px solid #e0e0e0",
-    borderRadius: "3px",
+    borderRadius: "8px",
     backgroundColor: "#f2f2f2", // Fundo sutil para o cabeçalho
     boxShadow: "0px 5px 10px rgba(0, 0, 0, 0.2)",
   },
@@ -45,7 +42,7 @@ const styles = {
     flex: "1",
     maxWidth: "50%",
     padding: "10px",
-    borderRadius: "3px",
+    borderRadius: "8px",
     backgroundColor: "#f2f2f2", // Fundo sutil para tabelas
     boxShadow: "0px 5px 10px rgba(0, 0, 0, 0.2)",
     color: "#020202", // Texto claro
@@ -81,7 +78,7 @@ const styles = {
     display: 'flex',
     gap: '10px',
     justifyContent: 'space-between',
-    padding: '5px 1rem',
+    padding: '1.2rem 1rem',
     wordWrap: "break-word",
     backgroundColor: "#f2f2f2", // Fundo leve para itens
     borderRadius: "3px",
@@ -140,7 +137,13 @@ const styles = {
     display: 'flex',
     justifyContent: 'center',
     padding: '2rem 0'
-  }
+  },
+  error: {
+    paddingBottom: 20,
+    width: '100%',
+    display: 'flex',
+    justifyContent: 'center'
+  },
 };
 
 const modalStyle = {
@@ -283,7 +286,7 @@ export default function Home() {
 
   const handleSendFile = () => {
     if (!file) {
-      console.error("Nenhum arquivo selecionado!");
+      setError("Nenhum arquivo selecionado!")
       return;
     }
     setLoading(true)
@@ -311,6 +314,21 @@ export default function Home() {
           saidas,
         };
         const entradaSaida = extractTransactionData(processedData)
+        const totalEntradas = entradaSaida.entradasDetails.reduce((total, entrada) => total + parseFloat(entrada.firstValue), 0);
+        const totalSaidas = entradaSaida.saidasDetails.reduce((total, saida) => total + parseFloat(saida.firstValue), 0);
+        console.log(totalEntradas);
+        console.log(totalSaidas);
+
+        setChartData({
+          labels: ['Entradas', 'Saídas'],
+          datasets: [
+            {
+              data: [totalEntradas, totalSaidas],
+              backgroundColor: ['#4CAF50', '#F44336'], // Cores para o gráfico
+              hoverBackgroundColor: ['#66BB6A', '#E57373'], // Cores ao passar o mouse
+            },
+          ],
+        })
         setData(entradaSaida);
         setLoading(false);
         setModalState(false)
@@ -321,8 +339,6 @@ export default function Home() {
   };
 
   if (loading) return <div>Carregando...</div>;
-
-  if (error) return <div>Erro: {error}</div>;
 
   return (
     <div style={styles.container}>
@@ -348,6 +364,13 @@ export default function Home() {
           </label>
           <Button style={styles.modalButton} variant="contained" onClick={handleSendFile}>Anexar</Button>
         </div>
+        {error && (
+          <Box style={styles.error}>
+            <Alert variant="filled" severity="warning">
+              {error}
+            </Alert>
+          </Box>
+        )}
       </ModalBasico >
 
       <ModalBasico
@@ -363,7 +386,26 @@ export default function Home() {
         </>
 
       </ModalBasico>
-      <h1 style={styles.title}>Extrato Bancário</h1>
+      <Typography variant="h4" align="center" gutterBottom
+        sx={{
+          fontSize: "36px",
+          marginBottom: "10px",
+          textAlign: "left",
+          color: "#2980B9",
+          fontWeight: 'bold'
+        }}>
+        Extrato
+      </Typography>
+      <Typography variant="h4" align="center" gutterBottom
+        sx={{
+          fontSize: "1.8rem",
+          marginBottom: "20px",
+          textAlign: "left",
+          color: "#595959",
+        }}>
+        Acompanhe seus ganhos, despesas e controle financeiro de maneira simples e eficiente.
+      </Typography>
+
 
       <div style={styles.header}>
         <div style={styles.headerContent}>

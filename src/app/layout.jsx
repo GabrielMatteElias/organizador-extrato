@@ -15,7 +15,7 @@ export default function RootLayout({ children }) {
         <ThemeProviderWrapper>
           <Box sx={{ display: 'flex' }}>
             <MenuLateral />
-            <Box sx={{ width: '100%', maxWidth: '120rem', margin: '0 auto', p: 2, maxHeight: '100vh' }}>
+            <Box sx={{ width: '100%', maxWidth: '120rem', margin: '0 auto', padding: '2.4rem 2.4rem 2.4rem 8.4rem' }}>
               {children}
             </Box>
           </Box>

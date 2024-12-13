@@ -1,20 +1,12 @@
 'use client'
-import { Box, TextField, Button, DialogTitle, Dialog, DialogActions, DialogContent } from '@mui/material';
-import { useState } from "react";
+import { Button, DialogTitle, Dialog, DialogActions, DialogContent } from '@mui/material';
 
 export function RemoveMeta({ open, onClose, onConfirm, meta }) {
-
-    const handleSubmit = (e) => {
-        e.preventDefault();
-
-        retornaMetaRemovida();
-    };
-
     return (
         <Dialog open={open} onClose={onClose}>
             <DialogTitle>Confirmar Exclusão</DialogTitle>
             <DialogContent>
-                Tem certeza de que deseja excluir a meta <strong style={{fontStyle: 'italic'}}>{meta}</strong>? Esta ação não pode ser desfeita.
+                Tem certeza de que deseja excluir a meta <strong style={{ fontStyle: 'italic' }}>{meta}</strong>? Esta ação não pode ser desfeita.
             </DialogContent>
             <DialogActions>
                 <Button onClick={onClose} color="primary"

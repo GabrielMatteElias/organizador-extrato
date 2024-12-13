@@ -232,6 +232,13 @@ const globalTeme = createTheme({
                 },
             },
         },
+        MuiAlert: {
+            styleOverrides: {
+                root: {
+                    fontSize: '1.3rem', // Definindo o fontSize do Alert
+                },
+            },
+        },
     }
 })
 

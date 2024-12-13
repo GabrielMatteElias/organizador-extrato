@@ -17,9 +17,12 @@ export function Grafico({ chartData, chartType }) {
             tooltip: {
                 enabled: true,
                 callbacks: {
-                    label: (context) => {
-                        const value = context.raw;
-                        return `R$ ${value}`; // Adiciona o prefixo 'R$' no tooltip
+                    label: function (context) {
+                        const value = context.raw; // Valor bruto do dado
+                        return new Intl.NumberFormat('pt-BR', {
+                            style: 'currency',
+                            currency: 'BRL',
+                        }).format(value);
                     },
                 },
             },
@@ -40,7 +43,7 @@ export function Grafico({ chartData, chartType }) {
     };
 
     return (
-        <div style={{ width: '400px', height: '400px'}}>
+        <div style={{ width: '400px', height: '400px' }}>
             {renderChart()}
         </div>
     );

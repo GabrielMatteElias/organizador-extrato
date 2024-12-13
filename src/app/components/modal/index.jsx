@@ -5,12 +5,11 @@ import CloseIcon from '@mui/icons-material/Close';
 import styles from './index.module.css';
 
 export function ModalBasico({ titulo, style, modal, setModal, children }) {
-    const handleClose = () => setModal(false);
 
     return (
         <Modal
             open={modal}
-            onClose={handleClose}
+            onClose={setModal}
             aria-labelledby="modal-modal-title"
             aria-describedby="modal-modal-description"
         >
